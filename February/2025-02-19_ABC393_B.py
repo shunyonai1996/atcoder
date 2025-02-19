@@ -17,5 +17,15 @@ for i in range(0, len(S)-1):
     list[i]==list[i+1]
     print(list[i])
 
+# 解答例
+# s = input()
+# n = len(s)
+# ans = 0
 
-1 1111111 1 1111111 1
+# for i in range(n):
+#   for j in range(i + 1, n):
+#     for k in range(j + 1, n):
+#       if j - i == k - j and s[i] == 'A' and s[j] == 'B' and s[k] == 'C':
+#         ans += 1
+
+# print(ans)
