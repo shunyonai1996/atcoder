@@ -9,13 +9,28 @@ sys.stdin=io.StringIO(INPUT)
 # ソートで文字列の長さが小さい順に並べ替える
 # ループでリストの要素を文字結合
 
+# AIによるソースレビュー
+# 変数名を適切に設定
+# 出力にはjoinを使う
+
 n = int(input())
-arr = [input() for _ in range(n)]
+strings = [input() for _ in range(n)]
 
-arr_copy = sorted(arr, key=len)
+sorted_strings = sorted(strings, key=len)
 
-answer = ''
-for i in range(n):
-    answer += arr_copy[i]
+answer = ''.join(sorted_strings)
 
+print(answer)
+
+
+# AIによる別解
+import heapq
+
+n = int(input())
+# (長さ, 文字列)のタプルをヒープに格納
+heap = [(len(s := input()), s) for _ in range(n)]
+heapq.heapify(heap)
+
+# ヒープから順に取り出して結合
+answer = ''.join(heapq.heappop(heap)[1] for _ in range(n))
 print(answer)
