@@ -1,1 +1,7 @@
 input.txt
+
+node_modules
+
+package*
+
+tsconfig.json
