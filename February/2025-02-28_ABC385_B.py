@@ -41,3 +41,27 @@ for value in T:
     print(present)
 
 print(f'{santa[0]+1} {santa[1]+1} {present}')
+
+
+# 解説記事の解答
+H,W,X,Y = map(int,input().split())
+S = [list(input()) for _ in range(H)]
+T = input()
+
+# リストで扱うため-1
+X-=1
+Y-=1
+ans=0
+for c in T:
+  # 文字列チェック、かつ'#'ではない
+  if c=='U' and S[X-1][Y]!='#': X-=1
+  if c=='D' and S[X+1][Y]!='#': X+=1
+  if c=='L' and S[X][Y-1]!='#': Y-=1
+  if c=='R' and S[X][Y+1]!='#': Y+=1
+  # '@'なら加算し、無効化する
+  if S[X][Y]=='@':
+    ans+=1
+    S[X][Y]='.'
+
+# リストで扱ったXYを+1
+print(X+1,Y+1,ans)
