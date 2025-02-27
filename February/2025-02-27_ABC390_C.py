@@ -78,3 +78,33 @@ def solve(H, W, grid):
 H, W = map(int, input().split())
 grid = [list(input()) for _ in range(H)]
 print(solve(H, W, grid))
+
+# 解説記事のPython変換コード
+# 入力
+H, W = map(int, input().split())
+S = [input() for _ in range(H)]
+
+# 初期化
+h_min = W   # C++の1000に相当（十分大きい値）
+h_max = -1
+w_min = W   # C++の1000に相当（十分大きい値）
+w_max = -1
+flag = True
+
+# バウンディングボックスの座標を見つける
+for i in range(H):
+    for j in range(W):
+        if S[i][j] == '#':
+            h_min = min(h_min, i)
+            h_max = max(h_max, i)
+            w_min = min(w_min, j)
+            w_max = max(w_max, j)
+
+# バウンディングボックス内に'.'があるかチェック
+for i in range(h_min, h_max + 1):
+    for j in range(w_min, w_max + 1):
+        if S[i][j] == '.':
+            flag = False
+
+# 結果出力
+print("Yes" if flag else "No")
