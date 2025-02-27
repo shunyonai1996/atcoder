@@ -37,3 +37,44 @@ for i in range(H):
             elif check_list[value] == 0 and (S[i] == '#'):
                 print('No')
                 break
+
+
+# AIによる回答
+def solve(H, W, grid):
+    # 黒マスの座標を記録
+    black = []
+    min_i = H
+    max_i = -1
+    min_j = W
+    max_j = -1
+
+    # 黒マスの範囲を特定
+    for i in range(H):
+        for j in range(W):
+            if grid[i][j] == '#':
+                black.append((i, j))
+                min_i = min(min_i, i)
+                max_i = max(max_i, i)
+                min_j = min(min_j, j)
+                max_j = max(max_j, j)
+    # 黒マスがない場合
+    if not black:
+        return 'Yes'
+
+    # 長方形の領域をチェック
+    for i in range(min_i, max_i + 1):
+        for j in range(min_j, max_j + 1):
+            if grid[i][j] == '.':  # 白マスがあれば不可能
+                return 'No'
+
+    # 長方形の外に黒マスがないか確認
+    for i, j in black:
+        if not (min_i <= i <= max_i and min_j <= j <= max_j):
+            return 'No'
+
+    return 'Yes'
+
+# 入力処理
+H, W = map(int, input().split())
+grid = [list(input()) for _ in range(H)]
+print(solve(H, W, grid))
