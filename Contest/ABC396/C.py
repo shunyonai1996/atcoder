@@ -9,16 +9,18 @@ B = [i for i in list(map(int, input().split()))]
 W = [i for i in list(map(int, input().split()))]
 B = sorted(B, reverse=True)
 W = sorted(W, reverse=True)
-print(B,W)
-before_ans = 0
-ans = 0
+current_ans = 0
+ans = float('-inf')
 
-for i in range(len(W)):
-    if before_ans + B[i] + W[i] > before_ans + B[i]:
-        ans = before_ans + B[i] + W[i]
-        before_ans = ans
-    elif before_ans > before_ans + B[i]:
-        print(ans)
+for i in range(N):
+    if i < M:
+        current_ans = current_ans + B[i]
+        if current_ans < current_ans + W[i]:
+            current_ans += W[i]
+        ans = max(current_ans, ans)
+    else:
+        current_ans = current_ans + B[i]
+        ans = max(current_ans, ans)
 
 if 0 < ans:
     print(ans)
