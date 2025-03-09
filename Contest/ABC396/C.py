@@ -4,6 +4,10 @@ with open("./input.txt") as TxtOpen:
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
+# AIによるソースレビュー
+# current_ans = current_ans + B[i]はcurrent_ans += B[i]とした方が可読性が上がる
+# 回答の0か正の値かを判定する場合は、max()関数を使用した方が意図が伝わり、可読性が上がる
+
 N, M = list(map(int, input().split()))
 B = [i for i in list(map(int, input().split()))]
 W = [i for i in list(map(int, input().split()))]
@@ -14,7 +18,7 @@ ans = float('-inf')
 
 for i in range(N):
     if i < M:
-        current_ans = current_ans + B[i]
+        current_ans += B[i]
         if current_ans < current_ans + W[i]:
             current_ans += W[i]
         ans = max(current_ans, ans)
@@ -22,7 +26,4 @@ for i in range(N):
         current_ans = current_ans + B[i]
         ans = max(current_ans, ans)
 
-if 0 < ans:
-    print(ans)
-else:
-    print(0)
+print(max(ans, 0))
