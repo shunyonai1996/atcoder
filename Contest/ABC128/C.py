@@ -29,13 +29,33 @@ S = []
 for i in range(M):
     data = list(map(int, input().split()))
     k = data[0]
-    connected = [i-1 for i in data[1:]]
-    S.append(connected)
-    print(f'スイッチ{i}は{connected}の電球に対応')
+    connect = data[1:]
+    indexed_connect = [i - 1 for i in connect]
+    S.append(indexed_connect)
 
+print(S)
 
-# bit全探索
+P = list(map(int, input().split()))
 
+# bit全探索のループ
+ans = 0
+for mask in range(1 << N):
+    # print(f'mask:{mask} N:{N}')
+    print(f"[DEBUG] 現在のmask={mask:0{N}b} (2進表記)")
+
+    ok_counter = 0
+    # 全ての電球のループ
+    for i in range(M):
+        # 電球がONの数をカウント
+        cnt = 0
+        # i番目の電球と接続しているスイッチをループ
+        for k in S[i]:
+            print(f'mask:{mask}')
+            print(f'1 << k:{1 << k}')
+            if mask & (1 << k): cnt += 1
+        # ONのスイッチを割った余りがPと一致しているか確認
+        if cnt % 2 == P[i]:
+            ok_counter += 1
 
 
 exit()
