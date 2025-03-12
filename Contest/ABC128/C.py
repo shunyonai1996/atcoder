@@ -4,34 +4,39 @@ with open("./input.txt") as TxtOpen:
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
+# issue
+# スイッチN 電球M
+# 2行目から(最終行-1)行目 i番目の電球と繋がってるスイッチのdata
+# i番目の電球に繋がってるスイッチ群がdata(1:)
+# data(1:)のONのスイッチ数%2==Pなら点灯
+
+# スイッチと電球の接続関係
+# S[i] => [電球[sia],電球[sib]...]で表せる？表せるとして、ON/OFFの状態をどうやって解釈する？
+
+# 電球に対応するスイッチをマッピングするデータ
+# 全てのスイッチのON/OFFの組み合わせデータ
+
+# スイッチのON/OFFの組み合わせ分ループ(bit全探索)
+# Pが全て点灯している数をカウントアップする
+
+
 
 N, M = list(map(int, input().split()))
-# ks = [list(map(int, input().split())) for i in range(N)]
+print(f"[DEBUG] スイッチ数 N={N}, 電球数 M={M}")
 
-ans = 0
-
+# スイッチごとに繋がっている電球情報を受け取る
 S = []
-for _ in range(M):
-    k, *switches = map(int, input().split())
-    S.append([s-1 for s in switches])  # 0-indexedに変換
+for i in range(M):
+    data = list(map(int, input().split()))
+    k = data[0]
+    connected = [i-1 for i in data[1:]]
+    S.append(connected)
+    print(f'スイッチ{i}は{connected}の電球に対応')
 
-P = list(map(int, input().split()))
-print(f"[DEBUG] 点灯条件 P={P}")
 
-# 2. 全パターン試行
-ans = 0
-for state in range(1 << N):  # 全スイッチの状態を試す
-    # 各電球をチェック
-    for bulb in range(M):
-        # その電球に接続されているスイッチのONの数を数える
-        on_count = sum(1 for s in S[bulb] if state & (1 << s))
-        # 条件を満たさない場合は、このパターンを終了
-        if on_count % 2 != P[bulb]:
-            break
-    else:  # 全ての電球が条件を満たした場合
-        ans += 1
+# bit全探索
 
-print(ans)
+
 
 exit()
 
