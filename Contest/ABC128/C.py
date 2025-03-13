@@ -43,6 +43,7 @@ for mask in range(1 << N):
             if mask & (1 << k): cnt += 1
         # ONのスイッチを割った余りがPと一致しているか確認
         if cnt % 2 == P[i]: ok_count += 1
+    # maskのON/OFFパターンで全ての電球がONになっていれば+1
     if ok_count == M: ans += 1
 
 print(ans)
