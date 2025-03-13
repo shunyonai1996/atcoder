@@ -11,20 +11,14 @@ sys.stdin=io.StringIO(INPUT)
 # data(1:)のONのスイッチ数%2==Pなら点灯
 
 # スイッチと電球の接続関係
-# S[i] => [電球[sia],電球[sib]...]で表せる？表せるとして、ON/OFFの状態をどうやって解釈する？
+# S[i] => [[電球iに繋がっているスイッチ],[電球i+1に繋がっているスイッチ]...]の形式で保持
 
-# 電球に対応するスイッチをマッピングするデータ
-# 全てのスイッチのON/OFFの組み合わせデータ
-
-# スイッチのON/OFFの組み合わせ分ループ(bit全探索)
-# Pが全て点灯している数をカウントアップする
-
-
+# 全てのスイッチON/OFFの組み合わせでbit全探索
+# 1回のループごとにPとの計算結果を算出し、全てONならカウントアップ
 
 N, M = list(map(int, input().split()))
-print(f"[DEBUG] スイッチ数 N={N}, 電球数 M={M}")
 
-# スイッチごとに繋がっている電球情報を受け取る
+# 電球と接続済のスイッチをデータ化
 S = []
 for i in range(M):
     data = list(map(int, input().split()))
@@ -33,30 +27,25 @@ for i in range(M):
     indexed_connect = [i - 1 for i in connect]
     S.append(indexed_connect)
 
-print(S)
-
-P = list(map(int, input().split()))
-
 # bit全探索のループ
+P = list(map(int, input().split()))
 ans = 0
 for mask in range(1 << N):
-    # print(f'mask:{mask} N:{N}')
-    print(f"[DEBUG] 現在のmask={mask:0{N}b} (2進表記)")
-
-    ok_counter = 0
+    ok_count = 0
     # 全ての電球のループ
     for i in range(M):
         # 電球がONの数をカウント
         cnt = 0
         # i番目の電球と接続しているスイッチをループ
         for k in S[i]:
-            print(f'mask:{mask}')
-            print(f'1 << k:{1 << k}')
+            # ビットAND演算子とスイッチ番号(k)を左シフト演算したもので2進数同士を比較
+            # 電球が点灯しているかどうかチェック
             if mask & (1 << k): cnt += 1
         # ONのスイッチを割った余りがPと一致しているか確認
-        if cnt % 2 == P[i]:
-            ok_counter += 1
+        if cnt % 2 == P[i]: ok_count += 1
+    if ok_count == M: ans += 1
 
+print(ans)
 
 exit()
 
