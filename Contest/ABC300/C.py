@@ -10,3 +10,6 @@ sys.stdin=io.StringIO(INPUT)
 H, W = list(map(int, input().split()))
 N = min(H, W)
 print(H, W, N)
+
+list = [list(str(input())) for _ in range(H)]
+print(list)
