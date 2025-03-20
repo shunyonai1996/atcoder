@@ -5,21 +5,27 @@ sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
 # 2回目
+# AIによるソースレビュー
 
 H, W = list(map(int, input().split()))
 C = [list(str(input())) for _ in range(H)]
 
-ans = [0] * min(H,W)
-for i in range(1, H-1):
-    for j in range(1, W-1):
+N = min(H,W)
+ans = [0] * N
+
+for i in range(H):
+    for j in range(W):
         if C[i][j] == '#':
-            size = -1
-            for k in range(1, min(W-1, H-1)):
-                if C[i-k][j-k] == '#' and C[i+k][j+k] == '#' and C[i-k][j+k] == '#' and C[i+k][j-k] == '#':
-                    size += 1
-                else:
-                    break
-            if 0 <= size: ans [size] += 1
+            size  = 1
+            while (i-size >= 0 and i+size < H and
+                j-size >= 0 and j+size < W and
+                C[i-size][j-size] == '#' and
+                C[i+size][j+size] == '#' and
+                C[i-size][j+size] == '#' and
+                C[i+size][j-size] == '#'):
+                size += 1
+            if size > 1: ans[size-2] += 1
+
 print(*ans)
 
 
