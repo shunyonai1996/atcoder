@@ -4,46 +4,23 @@ with open("./input.txt") as TxtOpen:
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
-# issue
-# 二重ループ(O(NM))の処理①
-# grid[i][v:v+3] == ['#','.','#']ならvisited[i][v] = 1を設定
-# `#`の右下が`#`かどうか判定
-# 上記がTrueなら左上or右上の`#`の個数を計算する
+# 2回目
 
 H, W = list(map(int, input().split()))
-N = [0] * min(H, W) + [0]
+C = [list(str(input())) for _ in range(H)]
 
-grid = [list(str(input())) for _ in range(H)]
-
-# まずはサイズ1になりうる記号箇所の左上の頂点をマッピング
-
-visited = [[0] * W for _ in range(H)]
-for i in range(H):
-    for v in range(W):
-        if grid[i][v:v+3] == ['#','.','#'] and (v < 2 or visited[i][v-2] != 1):
-            if i < 1 or visited[i-2][v] != 1:
-                visited[i][v] = 1
-
-N[1] = visited[0].count(1)
-
-# visited[i][v] == 1がTrueなら、grid[i-1][v-1] == '#'か判定
-
-for i in range(1, H-2):
-    for v in range(W-2):
-        if visited[i][v] == 1:
-            # print(f'共通処理(条件分岐後) >>> i:{i}/v:{v}')
-            size = 1
-            # 起点から左上が'#'かを検証していく
-            for c in range(1, min(i, v)+1):
-                if grid[i-c][v-c] == '#':
+ans = [0] * min(H,W)
+for i in range(1, H-1):
+    for j in range(1, W-1):
+        if C[i][j] == '#':
+            size = -1
+            for k in range(1, min(W-1, H-1)):
+                if C[i-k][j-k] == '#' and C[i+k][j+k] == '#' and C[i-k][j+k] == '#' and C[i+k][j-k] == '#':
                     size += 1
-                    # print(f'i:{i}/v:{v}/c:{c}/size:{size}')
-                elif grid[i-c][v-c] == '.':
+                else:
                     break
-            # print(f'sizeは{size}')
-            N[size] += 1
-
-print(*N[1:])
+            if 0 <= size: ans [size] += 1
+print(*ans)
 
 
 # AIの解説
