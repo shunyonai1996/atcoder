@@ -5,7 +5,7 @@ sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
 N, M = list(map(int, input().split()))
-a = [int(input()) for _ in range(M)]
+a = set(int(input()) for _ in range(M))  # Convert to set for faster lookup
 # pattern = 0
 
 # print(N, M, a)
@@ -62,8 +62,10 @@ def dp_way(N):
     for i in range(N):
         print(f'{i+1}回目のループ')
         print(f'dpの状態: {dp}')
-        dp[i + 1] += dp[i]
-        dp[i + 2] += dp[i]
+        if i + 1 not in a:  # Skip broken steps
+            dp[i + 1] += dp[i]
+        if i + 2 not in a:  # Skip broken steps
+            dp[i + 2] += dp[i]
 
         print(f"dp[{i+1}] = {dp[i+1]}, dp[{i+2}] = {dp[i+2]}")  # 状態表示
 
