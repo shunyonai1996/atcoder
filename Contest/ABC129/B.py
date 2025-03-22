@@ -11,7 +11,7 @@ ans_list = []
 for i in range(1, N):
     first = W[:i]
     second = W[i:]
-    total = sum(first) + sum(second)
+    total = abs(sum(first) - sum(second))
     ans_list.append(total)
 
-print(max(ans_list))
+print(min(ans_list))
