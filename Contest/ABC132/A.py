@@ -10,3 +10,8 @@ if S[0] == S[1] and S[1] != S[2] and S[2] == S[3]:
     print('Yes')
 else:
     print('No')
+
+# AIによるレビュー
+S = list(str(input()))
+counts = [S.count(c) for c in set(S)]
+print('Yes') if counts == [2, 2] else print('No')
