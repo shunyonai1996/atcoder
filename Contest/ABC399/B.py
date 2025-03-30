@@ -10,20 +10,24 @@ ans_list = [0] * N
 rank = 0
 
 for i in range(N):
-    count_top_ranker = max(P)
-    if count_top_ranker == 0: break
-    if 1 < P.count(count_top_ranker):
-        # print(f'1回目{P.count(count_top_ranker)}')
-        rank_add = P.count(count_top_ranker)
-        for l in range(P.count(count_top_ranker)):
-            multi_top_ranker = P.index(max(P))
-            ans_list[multi_top_ranker] = rank + 1
+    if max(P) == 0: break
+    # 最高得点者をカウント -> 複数人の場合
+    if 1 < P.count(max(P)):
+        # 最高得点者の人数
+        cnt_top_rankers = P.count(max(P))
+        # 最高得点者の人数分ループを回す
+        for l in range(cnt_top_rankers):
+            # 最高得点者を回答用のリストに順位を追加
+            ans_list[P.index(max(P))] = rank + 1
+            # カウント済みの得点者の点数を0に更新
             P[P.index(max(P))] = 0
-        rank += rank_add
-        # print(f'2回目{rank_add}')
-        # print(rank)
+        # 最高得点者の人数分rankを増やす
+        rank += cnt_top_rankers
+    # 最高得点者が1人
     else:
+        # 最高得点者を回答用のリストに順位を追加
         top_ranker = P.index(max(P))
+        # カウント済みの得点者の点数を0に更新
         P[P.index(max(P))] = 0
         ans_list[top_ranker] = rank + 1
         rank += 1
