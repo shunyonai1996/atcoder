@@ -33,3 +33,35 @@ for i in range(N):
         rank += 1
 
 [print(i) for i in ans_list]
+
+# 別解
+# P[i]よりも大きい得点者の数をカウント
+N = int(input())
+P = list(map(int, input().split()))
+
+for i in range(N):
+    rank = 1
+    for j in range(N):
+        if P[i] < P[j]:
+            rank += 1
+    print(rank)
+
+# AIによる別解
+n = int(input())
+p = list(map(int, input().split()))
+
+indexed = sorted([(v, i) for i, v in enumerate(p)], reverse=True)
+res = [0] * n
+rank = 1
+for i, (val, idx) in enumerate(indexed):
+    if i > 0 and val == indexed[i - 1][0]:
+        print(f'i:{i}/val:{val}/idx:{idx}')
+        res[idx] = res[indexed[i - 1][1]]
+    else:
+        print(f'i:{i}/val:{val}/idx:{idx}')
+        print(f'res[idx]:{res}')
+        res[idx] = i + 1
+        print(f'res[idx]:{res}')
+
+for r in res:
+    print(r)
