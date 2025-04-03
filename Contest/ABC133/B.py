@@ -7,6 +7,11 @@ sys.stdin=io.StringIO(INPUT)
 N, D = list(map(int, input().split()))
 X = [list(map(int, input().split())) for _ in range(N)]
 
-for i in range(N):
-    for j in range(D):
-        print(i, j)
+# N回のループでN
+# 
+print(X)
+
+for i in range(N-1):
+    for j in range(D-1):
+        print(X[i][j] - [j+1])
+        print(X[i+1][j] - X[i+1][j+1])
