@@ -4,14 +4,15 @@ with open("./input.txt") as TxtOpen:
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
+import math
 N, D = list(map(int, input().split()))
 X = [list(map(int, input().split())) for _ in range(N)]
-
-# N回のループでN
-# 
-print(X)
+ans = 0
 
 for i in range(N-1):
-    for j in range(D-1):
-        print(X[i][j] - [j+1])
-        print(X[i+1][j] - X[i+1][j+1])
+    for j in range(i, N-1):
+        calc_list = [(x - y) ** 2 for x, y in zip(X[i], X[j+1])]
+        sqrt_list = math.sqrt(sum(calc_list))
+        if sqrt_list % 1 == 0:
+            ans += 1
+print(ans)
