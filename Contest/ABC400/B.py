@@ -4,12 +4,6 @@ with open("./input.txt") as TxtOpen:
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
-N, M = list(map(int, input().split()))
-
-X = 1
-for i in range(M):
-    X += N ** (i+1)
-if X <= 10 ** 9:
-    print(X)
-else:
-    print('inf')
+N, M = map(int, input().split())
+X = sum(N ** i for i in range(M+1))
+print(X) if X <= 10 ** 9 else print('inf')
