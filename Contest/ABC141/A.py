@@ -1,0 +1,14 @@
+import io,sys
+with open("./input.txt") as TxtOpen:
+    INPUT=TxtOpen.read()
+sys.stdin=io.StringIO(INPUT)
+# --------------------------------------------------------
+
+S = input()
+
+if S == 'Sunny':
+    print('Cloudy')
+elif S == 'Cloudy':
+    print('Rainy')
+else:
+    print('Sunny')
