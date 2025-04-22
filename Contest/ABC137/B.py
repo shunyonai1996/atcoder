@@ -1,0 +1,11 @@
+import io,sys
+with open("./input.txt") as TxtOpen:
+    INPUT=TxtOpen.read()
+sys.stdin=io.StringIO(INPUT)
+# --------------------------------------------------------
+
+# Xの座標を起点に前後K個の座標を順番に出力する
+K, X = list(map(int, input().split()))
+min_val, max_val = X-K+1,X+K-1
+
+[print(i) for i in range(min_val, max_val+1)]
