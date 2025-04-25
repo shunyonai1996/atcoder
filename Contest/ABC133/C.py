@@ -5,19 +5,18 @@ sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
 L, R = map(int, input().split())
-min_val = float('inf')
-
-if 2019 < R - L:
-    loop_cnt = L + 2019
+if 2019 <= R - L:
+    print('0')
 else:
-    loop_cnt = R
-
-for i in range(L, loop_cnt):
-    for j in range(L, loop_cnt):
-        min_val = min(min_val, (i * (j + 1)) % 2019)
+    min_val = float('inf')
+    for i in range(L, R):
+        for j in range(L+1, R+1):
+            min_val = min(min_val, (i * j) % 2019)
+            if min_val == 0:
+                break
         if min_val == 0:
             break
-print(min_val)
+    print(min_val)
 
 
 # 解説記事をpython変換
@@ -41,3 +40,19 @@ def main():
     global L, R
     L, R = map(int, input().split())
     print(solve())
+
+# AIの別解
+L, R = map(int, input().split())
+
+# 範囲が2019以上あるなら、必ず mod 2019 で 0 が作れる
+if R - L >= 2019:
+    print(0)
+else:
+    min_val = float('inf')
+    for i in range(L, R):
+        for j in range(i + 1, R + 1):
+            min_val = min(min_val, (i * j) % 2019)
+            if min_val == 0:
+                print(0)
+                exit()
+    print(min_val)
