@@ -7,14 +7,22 @@ sys.stdin=io.StringIO(INPUT)
 A, B, C, X = [int(input()) for _ in range(4)]
 ans = 0
 
-for a in range(0, A+1):
-    if 500 * a <= X:
+for a in range(min(A+1, X//500+1)):
+    value_a = X - 500 * a
+    for b in range(min(B+1, value_a//100+1)):
+        value_b = value_a - 100 * b
+        if value_b // 50 <= C:
+            ans += 1
+print(ans)
 
-        for b in range(0, B+1):
-            if 100 * b <= X:
+# AIによる数学的アプローチの別解
+A, B, C, X = [int(input()) for _ in range(4)]
+ans = 0
 
-                for c in range(0, C+1):
-                    if 50 * c <= X:
-                        if (500 * a) + (100 * b) + (50 * c) == X:
-                            ans += 1
+for a in range(min(A+1, X//500 + 1)):
+    for b in range(min(B+1, (X - 500*a)//100 + 1)):
+        c_needed = (X - 500*a - 100*b) // 50
+        if (X - 500*a - 100*b) % 50 == 0 and 0 <= c_needed <= C:
+            ans += 1
+
 print(ans)
