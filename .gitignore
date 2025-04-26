@@ -1,7 +1,5 @@
 input.txt
-
+template.py
 node_modules
-
 package*
-
 tsconfig.json
