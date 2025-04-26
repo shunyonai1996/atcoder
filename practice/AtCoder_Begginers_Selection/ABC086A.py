@@ -3,3 +3,6 @@ with open("/Users/shunyonai/Documents/GitHub/competitive-programming/input.txt")
     INPUT=TxtOpen.read()
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
+
+a, b = map(int, input().split())
+print("Even") if a*b % 2 == 0 else print("Odd")
