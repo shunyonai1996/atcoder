@@ -22,11 +22,32 @@ ans = 0
 pre_stuck = 0
 
 for i in range(N):
-
     ans += min(A[i], B[i]+pre_stuck)
-    pre_stuck = max(0, min(B[i], (B[i]+pre_stuck)-A[i]))
+    pre_stuck = B[i] - A[i] - pre_stuck
+    max(0, min(B[i], (B[i]+pre_stuck)-A[i]))
 
 if 0 < pre_stuck:
     ans += min(A[N], pre_stuck)
+
+print(ans)
+
+
+# AIによる別解
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+ans = 0
+
+for i in range(N):
+    defeat = min(A[i], B[i])
+    ans += defeat
+    B[i] -= defeat
+    
+    next_defeat = min(A[i+1], B[i])
+    ans += next_defeat
+    A[i+1] -= next_defeat
 
 print(ans)
