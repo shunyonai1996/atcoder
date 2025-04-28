@@ -9,15 +9,13 @@ S = list(input())
 
 ans = 'Yes'
 for i in range(len(T)-len(S)+1):
-    flg = True
+    ok = True
     for j in range(len(S)):
-        if T[i+j] == S[j] or T[i+j]=='?':
-            continue
-        else:
-            flg=False
-    if flg == False:
-        ans = 'No'
-    else:
+        if T[i+j] != S[j] and T[i+j] != '?':
+            ok = False
+            ans = 'No'
+            break
+    if ok:
         ans = 'Yes'
         break
 print(ans)
