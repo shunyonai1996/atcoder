@@ -1,22 +1,25 @@
 import io,sys
-with open("/Users/shunyonai/Documents/GitHub/competitive-programming/beginner/ABC403/input.txt") as TxtOpen:
-    INPUT=TxtOpen.read()
+with open("/Users/shunyonai/Documents/GitHub/competitive-programming/input.txt") as f:
+    INPUT=f.read()
 sys.stdin=io.StringIO(INPUT)
 # --------------------------------------------------------
 
-pn, pm, pq = list(map(int, input().split()))
-mapping = [[0] * (pm + 1) for _ in range(pn + 1)]
-can_view_all = [False] * (pn+1)
+import sys
+input = sys.stdin.readline
 
-for _ in range(pq):
-    t, *q = list(map(int, input().split()))
-    if t == 2:
-        can_view_all[q[0]] = True
+N, M, Q = map(int, input().split())
+can_view = [set() for _ in range(N + 1)]
+can_view_all = [False] * (N + 1)
+
+for _ in range(Q):
+    t, *queue = map(int, input().split())
+    x = queue[0]
+    if t == 1:
+        can_view[x].add(queue[1])
+    elif t == 2:
+        can_view_all[x] = True
     else:
-        if t == 3:
-            if can_view_all[q[0]] == True or mapping[q[0]][q[1]] == 1:
-                print('Yes')
-            else:
-                print('No')
+        if can_view_all[x] or queue[1] in can_view[x]:
+            print('Yes')
         else:
-            mapping[q[0]][q[1]] = 1
+            print('No')
