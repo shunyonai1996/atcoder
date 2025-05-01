@@ -9,10 +9,7 @@ V = sorted(map(int, input().split()))
 max_val = 0
 calc_val = V[0]
 
-if N == 1:
-    print(V[0])
-else:
-    for i in range(1, N):
-        calc_val = (calc_val + V[i]) / 2
-        max_val = max(max_val, calc_val)
-    print(max_val)
+for i in range(1, N):
+    calc_val = (calc_val + V[i]) / 2
+    max_val = max(max_val, calc_val)
+print(max_val)
