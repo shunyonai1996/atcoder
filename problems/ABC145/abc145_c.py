@@ -2,24 +2,18 @@ import math
 import itertools
 
 N = int(input())
-# math.sqrt()
-map_list = [[0, 0] for _ in range(N)]
-for i in range(N):
-  map_list[i][0],map_list[i][1] = map(int, input().split())
-print(map_list)
-_permutations = list(itertools.permutations(map_list, 3))
+towns = [tuple(map(int, input().split())) for _ in range(N)]
 
-max_distance = 0
+total_distance = 0
+avg_val = 0
 
-print(_permutations)
-for i in range(len(_permutations)):
+for path in itertools.permutations(towns):
   distance = 0
-  for j in range(N):
-    for l in range(N):
-      distance_x = (_permutations[i][j][0] - _permutations[i][j][1]) ** 2
-      distance_y = (_permutations[i][j][0] - _permutations[i][j][1]) ** 2
-      distance += math.sqrt(distance_x+distance_y)
-      print(f"distance_x: {distance_x}, distance_y: {distance_y}, distance: {distance}")
-  avg_distance = distance / len(_permutations)
-  max_distance = max(max_distance, avg_distance)
-print(max_distance)
+  for j in range(N-1):
+    x1, y1 = path[j]
+    x2, y2 = path[j+1]
+    total_distance += math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+  avg_val += 1
+
+average = total_distance / avg_val
+print(f"{average:.10f}")
