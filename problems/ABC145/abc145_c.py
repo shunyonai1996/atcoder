@@ -12,7 +12,8 @@ for path in itertools.permutations(towns):
   for j in range(N-1):
     x1, y1 = path[j]
     x2, y2 = path[j+1]
-    total_distance += math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+    distance += math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+  total_distance += distance
   avg_val += 1
 
 average = total_distance / avg_val

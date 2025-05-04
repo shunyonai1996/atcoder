@@ -26,7 +26,7 @@ sys.stdin=io.StringIO(INPUT)
 
 # for i in range(1, len(prime)):
 #     for j in range(1, len(prime)):
-        
+
 #         min_point = min(min_point, l-1 + r-1)
 
 # print(N-1) if min_point == float('inf') else print(min_point)
