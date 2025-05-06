@@ -11,12 +11,12 @@ for bit in range(2 ** 3):
 
 
 # AIの別解
-# l = [int(i) for i in map(str, input())]
-# ops = ['-', '+']
-# for ops1 in ops:
-#     for ops2 in ops:
-#         for ops3 in ops:
-#             expression = f"{l[0]}{ops1}{l[1]}{ops2}{l[2]}{ops3}{l[3]}"
-#             if eval(expression) == 7:
-#                 print(expression+"=7")
-#                 exit()
+l = [int(i) for i in map(str, input())]
+ops = ['-', '+']
+for ops1 in ops:
+    for ops2 in ops:
+        for ops3 in ops:
+            expression = f"{l[0]}{ops1}{l[1]}{ops2}{l[2]}{ops3}{l[3]}"
+            if eval(expression) == 7:
+                print(expression+"=7")
+                exit()
