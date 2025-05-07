@@ -4,4 +4,4 @@ node_modules
 package*
 tsconfig.json
 test
-memo.md
+*.md
