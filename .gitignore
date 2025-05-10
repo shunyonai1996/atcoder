@@ -1,4 +1,4 @@
-input.txt
+input*.txt
 template.py
 node_modules
 package*
