@@ -9,3 +9,9 @@ elif M < K:
     print(min(x, M))
 else:
     print('0')
+
+# AIによる別解
+N, K = map(int, input().split())
+
+r = N % K
+print(min(r, abs(K - r)))
