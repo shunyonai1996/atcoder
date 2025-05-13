@@ -1,3 +1,4 @@
+# 全探索*貪欲
 N = int(input())
 S = [list(map(int, input())) for _ in range(N)]
 min_t = float('inf')
