@@ -1,1 +1,4 @@
-print(''.join([i for i in map(str, list(input()[-2:]))]))
+R, C = map(int, input().split())
+A = [list(map(int, input().split())) for _ in range(2)]
+
+print(A[R-1][C-1])
