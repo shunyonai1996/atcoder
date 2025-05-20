@@ -1,8 +1,17 @@
+import collections
 N = int(input())
 A = list(map(int, input().split()))
 
-ans = A[0]
-for i in range(1, N):
-    ans *= A[i]
+if 0 in A:
+    print(0)
+    exit()
 
-print(ans) if ans <= 10 ** 18 else print('-1')
+ans = 1
+for item in collections.Counter(A).items():
+    i, c = item
+    ans *= i ** c
+    if 10 ** 18 < ans:
+        print(-1)
+        exit()
+
+print(ans)
