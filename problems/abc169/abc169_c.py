@@ -1,9 +1,5 @@
-A, B = input().split()
-A = int(A)
-B = B.split('.')
-if len(B) == 1:
-    B = int(B[0]) * 100
-else:
-    B = int(B[0]) * 100 + int(B[1].ljust(2, '0'))
+s = input().split()
+A = int(s[0])
+B = s[1].split('.')
 
-print(A * B // 100)
+print(A * (int(B[0]) * 100 + int(B[1].ljust(2, '0'))) // 100)
