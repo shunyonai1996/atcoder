@@ -1,14 +1,25 @@
+import io,sys
+with open("input.txt") as TxtOpen:
+    INPUT=TxtOpen.read()
+sys.stdin=io.StringIO(INPUT)
+# --------------------------------------------------------
+
 S = input()
 T = input()
+ans = 0
 
-cnt = 0
-for i in range(len(S)):
-    tmp_cnt = 0
-    for j in range(len(T)):
-        for k in range(len(T)-j):
-            if i+k <= len(S)-1 and j+k <= len(T)-1:
-                if T[j+k] == S[i+k]:
-                    tmp_cnt += 1
-    cnt = max(cnt, tmp_cnt)
+if len(S) == len(T):
+    cnt = 0
+    for i in range(len(S)):
+        if S[i] == T[i]:
+            cnt += 1
+    ans = max(ans, cnt)
+else:
+    for i in range(len(S)-len(T)):
+        cnt = 0
+        for j in range(len(T)):
+            if S[i + j] == T[j]:
+                cnt += 1
+        ans = max(ans, cnt)
 
-print(len(T) - cnt)
+print(len(T) - ans)
